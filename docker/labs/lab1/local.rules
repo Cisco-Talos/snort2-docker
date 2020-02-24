@@ -1,0 +1,1 @@
+alert tcp $HOME_NET any -> $EXTERNAL_NET $HTTP_PORTS (msg:"TEST Curl outbound connection attempt"; flow:to_server,established; content:"User-Agent: "; http_header; content:"curl/"; http_header; fast_pattern; sid:1000000;)

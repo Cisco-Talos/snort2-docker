@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+# If you want to randomize the IP SRC/DST use: --seed=423
+
+if test -z "$1"
+then
+	echo "usage: $(basename $0) <pcap> [ random ]"
+  echo "random is used if you would like to rerwite the src/dst ips to something random"
+  echo
+	exit 1
+elif test ! -e "$1"
+then
+	echo "ERROR: $1 doesn't exist"
+	exit 1
+fi
+
+if test ! -z "$2"
+then
+  random="--seed=$RANDOM"
+else
+  random=""
+fi
+
+cp $1 $1.orig
+tcprewrite --fixcsum -i $1 -o $1.tmp $random
+mv -v $1.tmp $1
