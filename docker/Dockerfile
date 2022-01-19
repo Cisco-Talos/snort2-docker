@@ -1,5 +1,5 @@
 FROM debian:buster-slim
-ENV VERSION 2.9.15.1
+ENV VERSION 2.9.19
 
 RUN mkdir -p /root/pcaps/
 COPY labs /root/
